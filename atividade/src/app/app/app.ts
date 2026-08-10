@@ -1,11 +1,12 @@
-import { Component,signal } from '@angular/core';
-import {consulta-deputados} from '../consulta-deputados/consulta-deputados';
-
+import { Component, signal } from '@angular/core';
+import { ConsultaDeputados } from '../consulta-deputados/consulta-deputados';
 
 @Component({
   selector: 'app-app',
-  imports: [consulta-deputados],
+  imports: [ConsultaDeputados],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrls: ['./app.css'],
 })
-export class App {}
+export class App {
+  protected readonly title = signal('atividade');
+}
