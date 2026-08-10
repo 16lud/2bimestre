@@ -1,4 +1,4 @@
- export type Deputado {
+ export type Deputado = {
 id: number,
 uri: string,
 nome: string,
