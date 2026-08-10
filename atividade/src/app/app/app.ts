@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component,signal } from '@angular/core';
+import {consulta-deputados} from '../consulta-deputados/consulta-deputados';
+
 
 @Component({
   selector: 'app-app',
-  imports: [],
+  imports: [consulta-deputados],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
