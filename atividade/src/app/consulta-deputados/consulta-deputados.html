@@ -1,1 +1,13 @@
-<p>consulta-deputados works!</p>
+<section class="consulta-deputados">
+  <h2>Lista de Deputados</h2>
+
+  <p *ngIf="!deputados()">Carregando deputados...</p>
+  <p *ngIf="deputados()?.length === 0">Nenhum deputado encontrado.</p>
+
+  <ul *ngIf="deputados()?.length">
+    <li *ngFor="let item of deputados()">
+      <strong>{{ item.nome }}</strong>
+      <span>{{ item.siglaPartido }} - {{ item.siglaUf }}</span>
+    </li>
+  </ul>
+</section>
