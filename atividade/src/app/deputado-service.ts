@@ -1,7 +1,7 @@
 import { inject, Service } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DeputadosResponse } from './deputados-response';
 import { Observable } from 'rxjs';
+import { DeputadosResponse } from './deputado';
 
 @Service()
 export class DeputadoService {
