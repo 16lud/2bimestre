@@ -8,6 +8,8 @@ export type Deputado = {
   idLegislatura: number;
   urlFoto: string;
   email: string;
+  dataInicio?: string;
+  dataFim?: string;
 };
 
 export type DeputadosResponse = {

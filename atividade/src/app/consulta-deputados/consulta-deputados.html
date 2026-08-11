@@ -14,6 +14,7 @@
 
   @if (carregando()) {
     <div class="carregando">
+      <div class="spinner"></div>
       <p>Carregando deputados...</p>
     </div>
   }
@@ -22,7 +23,7 @@
     <p class="info">Nenhum deputado encontrado.</p>
   }
 
-  @if (deputados()?.length) {
+  @if (!carregando() && deputados()?.length > 0) {
     <div class="resultados">
       <p class="total">Total: {{ deputados()?.length }} deputados</p>
       <div class="grid-deputados">
@@ -41,12 +42,16 @@
                 <strong>{{ deputado.siglaPartido }}</strong> - {{ deputado.siglaUf }}
               </p>
               <p class="cargo">Deputado Federal</p>
-              <p class="ano">
-                Posse: {{ obterDataInicio(deputado.idLegislatura) }}
-              </p>
-              <p class="ano">
-                Término: {{ obterDataFim(deputado.idLegislatura) }}
-              </p>
+              <div class="periodo-mandato">
+                <p class="data">
+                  <span class="label">Posse:</span>
+                  {{ formatarData(deputado.dataInicio) }}
+                </p>
+                <p class="data">
+                  <span class="label">Término:</span>
+                  {{ formatarData(deputado.dataFim) }}
+                </p>
+              </div>
               @if (deputado.email) {
                 <a [href]="'mailto:' + deputado.email" class="email">
                   {{ deputado.email }}
