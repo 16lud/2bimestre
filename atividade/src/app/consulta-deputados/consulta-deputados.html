@@ -4,9 +4,9 @@
   <div class="filtros">
     <div class="filtro-grupo">
       <label>ID do Partido:</label>
-      <input 
-        type="number" 
-        [ngModel]="idPartido()" 
+      <input
+        type="number"
+        [ngModel]="idPartido()"
         (ngModelChange)="idPartido.set($event)"
         placeholder="Ex: 10"
       />
@@ -14,18 +14,18 @@
 
     <div class="filtro-grupo">
       <label>Data Início (opcional):</label>
-      <input 
-        type="date" 
-        [ngModel]="dataInicio()" 
+      <input
+        type="date"
+        [ngModel]="dataInicio()"
         (ngModelChange)="dataInicio.set($event)"
       />
     </div>
 
     <div class="filtro-grupo">
       <label>Data Fim (opcional):</label>
-      <input 
-        type="date" 
-        [ngModel]="dataFim()" 
+      <input
+        type="date"
+        [ngModel]="dataFim()"
         (ngModelChange)="dataFim.set($event)"
       />
     </div>
