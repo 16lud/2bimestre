@@ -174,27 +174,35 @@
 }
 
 .cargo {
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
   color: #666;
   font-size: 0.9rem;
   font-style: italic;
 }
 
-.ano {
-  margin: 0.75rem 0;
-  padding: 0.5rem 0.75rem;
-  background: #f0f8ff;
-  border-left: 3px solid #007bff;
+.periodo-mandato {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+}
+
+.periodo-mandato .data {
+  margin: 0.4rem 0;
   color: #0056b3;
   font-weight: 600;
   font-size: 0.9rem;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.ano:last-of-type {
-  margin-bottom: 1rem;
+.periodo-mandato .label {
+  color: #333;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .email {
