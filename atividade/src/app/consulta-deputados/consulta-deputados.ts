@@ -21,31 +21,36 @@ export class ConsultaDeputados implements OnInit {
   carregarDeputados(): void {
     this.carregando.set(true);
     this.erro.set('');
+    console.log('Iniciando carregamento de deputados...');
 
     this.#deputadoService.obterDeputadosComDatas().subscribe({
       next: (deputados) => {
+        console.log('Deputados recebidos:', deputados.length);
+        console.log('Primeiros 3 deputados:', deputados.slice(0, 3));
         this.deputados.set(deputados);
         this.carregando.set(false);
       },
       error: (err) => {
+        console.error('Erro ao carregar deputados:', err);
         this.erro.set('Erro ao carregar deputados. Tente novamente.');
         this.carregando.set(false);
-        console.error(err);
       },
     });
   }
 
   formatarData(data: string | undefined): string {
-    if (!data) return 'Data indisponível';
+    if (!data) {
+      return 'Data indisponível';
+    }
 
     try {
       const date = new Date(data);
-      return date.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      });
-    } catch {
+      const dia = String(date.getDate()).padStart(2, '0');
+      const mes = String(date.getMonth() + 1).padStart(2, '0');
+      const ano = date.getFullYear();
+      return `${dia}/${mes}/${ano}`;
+    } catch (err) {
+      console.error('Erro ao formatar data:', data, err);
       return 'Data inválida';
     }
   }
