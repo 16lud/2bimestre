@@ -15,7 +15,7 @@ export class DeputadoService {
 
   obterDeputadosComDatas(): Observable<Deputado[]> {
     return this.obterTodos().pipe(
-      switchMap((res) => {
+      switchMap((res: DeputadosResponse) => {
         const deputados = res.dados;
 
         // Extrair IDs únicos de legislatura
@@ -23,7 +23,7 @@ export class DeputadoService {
 
         // Se não há legislaturas, retornar deputados sem datas
         if (idsUnicos.length === 0) {
-          return new Observable(observer => observer.next(deputados));
+          return new Observable<Deputado[]>(observer => observer.next(deputados));
         }
 
         // Fazer requisições em paralelo para cada legislatura
