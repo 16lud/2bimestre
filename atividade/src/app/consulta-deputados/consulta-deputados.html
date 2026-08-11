@@ -1,13 +1,20 @@
 <section class="consulta-deputados">
   <h2>Lista de Deputados</h2>
 
-  <p *ngIf="!deputados()">Carregando deputados...</p>
-  <p *ngIf="deputados()?.length === 0">Nenhum deputado encontrado.</p>
-
-  <ul *ngIf="deputados()?.length">
-    <li *ngFor="let item of deputados()">
-      <strong>{{ item.nome }}</strong>
-      <span>{{ item.siglaPartido }} - {{ item.siglaUf }}</span>
-    </li>
-  </ul>
+  @if (!deputados()) {
+    <p>Carregando deputados...</p>
+  }
+  @if (deputados()?.length === 0) {
+    <p>Nenhum deputado encontrado.</p>
+  }
+  @if (deputados()?.length) {
+    <ul>
+      @for (item of deputados(); track item.id) {
+        <li>
+          <strong>{{ item.nome }}</strong>
+          <span>{{ item.siglaPartido }} - {{ item.siglaUf }}</span>
+        </li>
+      }
+    </ul>
+  }
 </section>
