@@ -9,7 +9,7 @@ import { Deputado } from '../deputado';
 })
 export class ConsultaDeputados implements OnInit {
   readonly #deputadoService = inject(DeputadoService);
-  
+
   protected deputados = signal<Deputado[]>([]);
   protected carregando = signal(true);
   protected erro = signal('');
@@ -37,7 +37,7 @@ export class ConsultaDeputados implements OnInit {
 
   formatarData(data: string | undefined): string {
     if (!data) return 'Data indisponível';
-    
+
     try {
       const date = new Date(data);
       return date.toLocaleDateString('pt-BR', {

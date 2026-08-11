@@ -17,32 +17,32 @@ export class DeputadoService {
     return this.obterTodos().pipe(
       switchMap((res) => {
         const deputados = res.dados;
-        
+
         // Extrair IDs únicos de legislatura
         const idsUnicos = Array.from(new Set(deputados.map(d => d.idLegislatura)));
-        
+
         // Se não há legislaturas, retornar deputados sem datas
         if (idsUnicos.length === 0) {
           return new Observable(observer => observer.next(deputados));
         }
-        
+
         // Fazer requisições em paralelo para cada legislatura
         const requisicoes = idsUnicos.map(id =>
           this.#http.get<LegislaturasResponse>(`${this.url}/legislaturas/${id}`)
         );
-        
+
         return forkJoin(requisicoes).pipe(
           map((respostas) => {
             // Criar mapa de legislaturas: { id → {dataInicio, dataFim} }
             const mapaLegislaturas = new Map<number, Legislatura>();
-            
+
             respostas.forEach((res) => {
               if (res.dados && res.dados.length > 0) {
                 const leg = res.dados[0];
                 mapaLegislaturas.set(leg.id, leg);
               }
             });
-            
+
             // Mapear deputados com suas datas
             return deputados.map((deputado) => {
               const legislatura = mapaLegislaturas.get(deputado.idLegislatura);
