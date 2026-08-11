@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { forkJoin, map, switchMap } from 'rxjs/operators';
+import { forkJoin, switchMap, map } from 'rxjs';
 import { DeputadosResponse, LideresResponse, LegislaturasResponse, Deputado, Legislatura } from './deputado';
 
 @Injectable({ providedIn: 'root' })
@@ -32,8 +32,7 @@ export class DeputadoService {
         );
 
         return forkJoin(requisicoes).pipe(
-          map((respostas) => {
-            // Criar mapa de legislaturas: { id → {dataInicio, dataFim} }
+          map((respostas: LegislaturasResponse[]) => {
             const mapaLegislaturas = new Map<number, Legislatura>();
 
             respostas.forEach((res) => {
