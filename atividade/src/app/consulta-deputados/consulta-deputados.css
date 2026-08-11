@@ -10,6 +10,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .consulta-deputados h2 {
@@ -255,6 +257,14 @@
   .info-deputado h3 {
     font-size: 0.95rem;
   }
+
+  .periodo-mandato {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .periodo-mandato .data {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -264,6 +274,10 @@
 
   .foto-container {
     height: 250px;
+  }
+
+  .consulta-deputados h2 {
+    font-size: 1.4rem;
   }
 }
 
