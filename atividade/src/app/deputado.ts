@@ -14,6 +14,17 @@ export type DeputadosResponse = {
   dados: Deputado[];
 };
 
+export type Legislatura = {
+  id: number;
+  uri: string;
+  dataInicio: string;
+  dataFim: string;
+};
+
+export type LegislaturasResponse = {
+  dados: Legislatura[];
+};
+
 export type Lider = {
   id: number;
   uri: string;

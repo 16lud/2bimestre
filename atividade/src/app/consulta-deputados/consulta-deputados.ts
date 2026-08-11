@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { DeputadoService } from '../deputado-service';
-import { Deputado } from '../deputado';
+import { Deputado, Legislatura } from '../deputado';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -14,6 +14,7 @@ export class ConsultaDeputados implements OnInit {
   protected deputados = signal<Deputado[] | undefined>(undefined);
   protected carregando = signal<boolean>(true);
   protected erro = signal<string>('');
+  protected legislaturas = signal<Map<number, Legislatura>>(new Map());
 
   ngOnInit(): void {
     this.carregarDeputados();
@@ -26,7 +27,7 @@ export class ConsultaDeputados implements OnInit {
     this.#deputadoService.obterTodos().subscribe({
       next: (res) => {
         this.deputados.set(res.dados);
-        this.carregando.set(false);
+        this.carregarLegislaturas(res.dados);
       },
       error: (err) => {
         this.erro.set('Erro ao carregar deputados.');
@@ -36,7 +37,45 @@ export class ConsultaDeputados implements OnInit {
     });
   }
 
-  obterAnoCandidatura(idLegislatura: number): number {
-    return 2023 + (idLegislatura - 56) * 4;
+  private carregarLegislaturas(deputados: Deputado[]): void {
+    const idsUnicos = new Set(deputados.map(d => d.idLegislatura));
+    const mapa = new Map<number, Legislatura>();
+    let carregadas = 0;
+
+    idsUnicos.forEach(id => {
+      this.#deputadoService.obterLegislatura(id).subscribe({
+        next: (res) => {
+          if (res.dados && res.dados.length > 0) {
+            mapa.set(id, res.dados[0]);
+          }
+          carregadas++;
+          if (carregadas === idsUnicos.size) {
+            this.legislaturas.set(mapa);
+            this.carregando.set(false);
+          }
+        },
+        error: () => {
+          carregadas++;
+          if (carregadas === idsUnicos.size) {
+            this.legislaturas.set(mapa);
+            this.carregando.set(false);
+          }
+        },
+      });
+    });
+  }
+
+  obterDataInicio(idLegislatura: number): string {
+    const legislatura = this.legislaturas().get(idLegislatura);
+    if (!legislatura) return 'Data indisponível';
+    const date = new Date(legislatura.dataInicio);
+    return date.toLocaleDateString('pt-BR');
+  }
+
+  obterDataFim(idLegislatura: number): string {
+    const legislatura = this.legislaturas().get(idLegislatura);
+    if (!legislatura) return 'Data indisponível';
+    const date = new Date(legislatura.dataFim);
+    return date.toLocaleDateString('pt-BR');
   }
 }

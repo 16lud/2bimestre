@@ -42,7 +42,10 @@
               </p>
               <p class="cargo">Deputado Federal</p>
               <p class="ano">
-                Posse: {{ obterAnoCandidatura(deputado.idLegislatura) }}
+                Posse: {{ obterDataInicio(deputado.idLegislatura) }}
+              </p>
+              <p class="ano">
+                Término: {{ obterDataFim(deputado.idLegislatura) }}
               </p>
               @if (deputado.email) {
                 <a [href]="'mailto:' + deputado.email" class="email">
