@@ -49,7 +49,7 @@ export class DeputadoService {
         return forkJoin(requisicoes).pipe(
           map((respostas: LegislaturasResponse[]) => {
             console.log('Respostas das legislaturas:', respostas);
-            
+
             const mapaLegislaturas = new Map<number, Legislatura>();
 
             respostas.forEach((res) => {
@@ -70,14 +70,14 @@ export class DeputadoService {
                 dataInicio: legislatura?.dataInicio,
                 dataFim: legislatura?.dataFim,
               };
-              
+
               if (deputado.id <= 3) {
                 console.log(`Deputado: ${deputado.nome}, Legislatura: ${deputado.idLegislatura}, Datas:`, {
                   dataInicio: deputadoAtualizado.dataInicio,
                   dataFim: deputadoAtualizado.dataFim,
                 });
               }
-              
+
               return deputadoAtualizado;
             });
 
