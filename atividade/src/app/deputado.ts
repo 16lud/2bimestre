@@ -13,3 +13,21 @@ export type Deputado = {
 export type DeputadosResponse = {
   dados: Deputado[];
 };
+
+export type Lider = {
+  id: number;
+  uri: string;
+  nome: string;
+  siglaPartido: string;
+  uriPartido: string;
+  siglaUf: string;
+  urlFoto: string;
+  email: string;
+  titulo: string;
+  dataInicio: string;
+  dataFim: string | null;
+};
+
+export type LideresResponse = {
+  dados: Lider[];
+};

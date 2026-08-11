@@ -1,20 +1,81 @@
 <section class="consulta-deputados">
-  <h2>Lista de Deputados</h2>
+  <h2>Líderes e Vice-Líderes de Partidos</h2>
 
-  @if (!deputados()) {
-    <p>Carregando deputados...</p>
+  <div class="filtros">
+    <div class="filtro-grupo">
+      <label>ID do Partido:</label>
+      <input 
+        type="number" 
+        [ngModel]="idPartido()" 
+        (ngModelChange)="idPartido.set($event)"
+        placeholder="Ex: 10"
+      />
+    </div>
+
+    <div class="filtro-grupo">
+      <label>Data Início (opcional):</label>
+      <input 
+        type="date" 
+        [ngModel]="dataInicio()" 
+        (ngModelChange)="dataInicio.set($event)"
+      />
+    </div>
+
+    <div class="filtro-grupo">
+      <label>Data Fim (opcional):</label>
+      <input 
+        type="date" 
+        [ngModel]="dataFim()" 
+        (ngModelChange)="dataFim.set($event)"
+      />
+    </div>
+
+    <div class="botoes">
+      <button (click)="buscarLideres()" [disabled]="carregando()">
+        {{ carregando() ? 'Carregando...' : 'Buscar por Partido' }}
+      </button>
+      <button (click)="buscarTodosLideres()" [disabled]="carregando()">
+        {{ carregando() ? 'Carregando...' : 'Buscar Todos' }}
+      </button>
+    </div>
+  </div>
+
+  @if (erro()) {
+    <div class="erro">
+      <p>{{ erro() }}</p>
+    </div>
   }
-  @if (deputados()?.length === 0) {
-    <p>Nenhum deputado encontrado.</p>
+
+  @if (!lideres() && !carregando()) {
+    <p class="info">Digite um ID de partido e clique em "Buscar por Partido"</p>
   }
-  @if (deputados()?.length) {
-    <ul>
-      @for (item of deputados(); track item.id) {
-        <li>
-          <strong>{{ item.nome }}</strong>
-          <span>{{ item.siglaPartido }} - {{ item.siglaUf }}</span>
-        </li>
-      }
-    </ul>
+
+  @if (carregando()) {
+    <p class="carregando">Carregando líderes...</p>
+  }
+
+  @if (lideres()?.length === 0) {
+    <p class="info">Nenhum líder encontrado.</p>
+  }
+
+  @if (lideres()?.length) {
+    <div class="resultados">
+      <p class="total">Total: {{ lideres()?.length }} líderes encontrados</p>
+      <ul class="lista-lideres">
+        @for (item of lideres(); track item.id) {
+          <li class="lider-item">
+            <div class="lider-header">
+              <strong>{{ item.nome }}</strong>
+              <span class="cargo">{{ item.titulo }}</span>
+            </div>
+            <div class="lider-info">
+              <p><strong>Partido:</strong> {{ item.siglaPartido }} - {{ item.siglaUf }}</p>
+              <p><strong>Período:</strong> {{ formatarData(item.dataInicio) }} até {{ formatarData(item.dataFim) }}</p>
+              <p><strong>Email:</strong> {{ item.email || 'Não disponível' }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
   }
 </section>

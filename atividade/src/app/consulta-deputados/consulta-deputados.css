@@ -1,0 +1,195 @@
+.consulta-deputados {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.consulta-deputados h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.filtros {
+  background: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+}
+
+.filtro-grupo {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.filtro-grupo label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.filtro-grupo input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.filtro-grupo input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.botoes {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.botoes button {
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botoes button:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.botoes button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.erro {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1.5rem;
+}
+
+.info {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+  background: #e7f3ff;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.carregando {
+  text-align: center;
+  color: #007bff;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.resultados {
+  background: #fff;
+}
+
+.total {
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.lista-lideres {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.lider-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.lider-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.lider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.lider-header strong {
+  color: #333;
+  font-size: 1.1rem;
+  flex: 1;
+}
+
+.cargo {
+  background: #007bff;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.lider-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lider-info p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.lider-info strong {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .consulta-deputados {
+    padding: 1rem;
+  }
+
+  .filtros {
+    padding: 1rem;
+  }
+
+  .botoes {
+    flex-direction: column;
+  }
+
+  .botoes button {
+    width: 100%;
+  }
+
+  .lista-lideres {
+    grid-template-columns: 1fr;
+  }
+}
