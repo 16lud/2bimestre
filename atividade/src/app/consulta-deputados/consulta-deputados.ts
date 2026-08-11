@@ -1,11 +1,9 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { DeputadoService } from '../deputado-service';
 import { Deputado, Legislatura } from '../deputado';
-import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-consulta-deputados',
-  imports: [NgOptimizedImage],
   templateUrl: './consulta-deputados.html',
   styleUrls: ['./consulta-deputados.css'],
 })

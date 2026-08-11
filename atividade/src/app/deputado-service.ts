@@ -15,7 +15,4 @@ export class DeputadoService {
   obterLegislatura(idLegislatura: number): Observable<LegislaturasResponse> {
     return this.#http.get<LegislaturasResponse>(`${this.url}/legislaturas/${idLegislatura}`);
   }
-
-    return this.#http.get<LideresResponse>(url);
-  }
 }
